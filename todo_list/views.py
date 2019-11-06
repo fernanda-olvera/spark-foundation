@@ -5,3 +5,6 @@ from .models import Task
 def index(request):
     tasks=Task.objects.all()
     return render(request, 'todo_list/index.html', {'tasks':tasks})
+
+def login(request):
+    return render(request, 'todo_list/login.html', {})
