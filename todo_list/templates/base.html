@@ -11,8 +11,16 @@
 </head>
 <body>
     <nav class="navbar navbar-dark bg-dark">
-        <a href="login" class="btn btn-primary">Log in</a>
-        <a href="signup" class="btn btn-outline-primary">Sign Up</a>
+        <a href="/todo_list" class="brand">Spark Foundation</a>
+        <div>
+        {% if user.is_authenticated %}
+            <p>Welcome {{ user.username }}!</p>
+            <a href="{% url 'logout' %}" class="btn btn-danger">Log Out</a>
+        {% else %}
+            <a href="/todo_list/login" class="btn btn-primary">Log in</a>
+            <a href="/todo_list/signup" class="btn btn-outline-primary">Sign Up</a>
+        {% endif %}
+        </div>
     </nav>
     
     {% block content %}

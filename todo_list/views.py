@@ -8,7 +8,7 @@ from .forms import SignUpForm
 
 def index(request):
     tasks=Task.objects.all()
-    return render(request, 'todo_list/index.html', {'tasks':tasks})
+    return render(request, 'todo_list/home.html', {'tasks':tasks})
 
 def signup(request):
     if request.method == 'POST':
