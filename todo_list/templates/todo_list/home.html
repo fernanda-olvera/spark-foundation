@@ -4,10 +4,10 @@ To-Do List
 {% endblock title %}
 {% block content %}
 
-    {% for task in tasks %}
+    {% comment %} {% for task in tasks %}
         {{task}}
         <br>
-    {% endfor %}
+    {% endfor %} {% endcomment %}
     {% if user.is_authenticated %}
         Hi {{ user.username }}!
         <p><a href="{% url 'logout' %}">logout</a></p>
