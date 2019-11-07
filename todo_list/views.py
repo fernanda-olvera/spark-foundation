@@ -21,6 +21,6 @@ def signup(request):
             user=authenticate(username=username, password=raw_password)
             login(request, user)
             return redirect('home')
-        else:
-            form=UserCreationForm()
-        return render(request, 'todo_list/signup.html',{'form':form})
+    else:
+        form=UserCreationForm()
+    return render(request, 'todo_list/signup.html',{'form':form})
