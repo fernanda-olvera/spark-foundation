@@ -1,8 +1,9 @@
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.contrib.auth import login, authenticate
-from django.contrib.auth.forms import UserCreationForm
 from .models import Task
+
+from .forms import SignUpForm
 
 def index(request):
     tasks=Task.objects.all()
@@ -13,7 +14,7 @@ def login(request):
 
 def signup(request):
     if request.method == 'POST':
-        form=UserCreationForm(request.POST)
+        form=SignUpForm(request.POST)
         if form.is_valid():
             form.save()
             username=form.cleaned_data.get('username')
@@ -22,5 +23,5 @@ def signup(request):
             login(request, user)
             return redirect('home')
     else:
-        form=UserCreationForm()
+        form=SignUpForm()
     return render(request, 'todo_list/signup.html',{'form':form})
