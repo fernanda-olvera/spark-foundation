@@ -3,20 +3,29 @@
 Log In
 {% endblock title %}
 {% block content %}
-
-    <h2>Log In</h2>
-    <form method="post">
-        {% csrf_token %}
-        {% for field in form %}
-            {{field.label}}
-            <br>
-            {{field}}
-            <br>
-        {% endfor %}
-        {% if form.errors %}
-            <small style="color: red">Your username and password didn't match. Please try again.</small><br>
-        {% endif %}
-        <button type="submit">Log In</button>
-    </form>
+<div class="container-fluid">
+    <div class="blurry">
+        <div class="bg-cat">
+        </div>
+    </div>
+    <div class="form-wrap d-flex align-items-center">
+        <div class="form-block">
+            <h2>Log In</h2>
+            <form method="post">
+                {% csrf_token %}
+                {% for field in form %}
+                    {{field.label}}
+                    <br>
+                    {{field}}
+                    <br>
+                {% endfor %}
+                {% if form.errors %}
+                    <small style="color: red">Your username and password didn't match. Please try again.</small><br>
+                {% endif %}
+                <button type="submit">Log In</button>
+            </form>
+        </div>
+    </div>
+</div>
     
 {% endblock content %}
