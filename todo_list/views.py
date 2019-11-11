@@ -1,6 +1,5 @@
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
-# from django.contrib.auth import login as auth_login
 from django.contrib.auth import authenticate
 from .models import Task
 
@@ -23,3 +22,4 @@ def signup(request):
     else:
         form=SignUpForm()
     return render(request, 'todo_list/signup.html', {'form':form})
+
