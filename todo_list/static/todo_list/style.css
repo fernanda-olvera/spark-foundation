@@ -52,3 +52,12 @@ input{
 button{
     margin-top: 20px;
 }
+input[name="email"], input[name="password2"]{
+    margin: 0;
+}
+p + button{
+    margin-top: 30px;
+}
+p > input{
+    margin: 15px 0;
+}
