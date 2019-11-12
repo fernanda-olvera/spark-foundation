@@ -1,7 +1,11 @@
 {% extends 'base.html' %}
+{% load static %}
 {% block title %}
 Log In
 {% endblock title %}
+{% block page_style %}
+<link rel="stylesheet" type="text/css" href="{% static 'todo_list/login_signup.css' %}">
+{% endblock page_style %}
 {% block content %}
 <div class="container-fluid">
     <div class="blurry">
@@ -20,7 +24,7 @@ Log In
                 {% if form.errors %}
                     <small style="color: red">Your username and password didn't match. Please try again.</small><br>
                 {% endif %}
-                <button class="btn btn-info btn-block" type="submit">LOG IN</button>
+                <button class="btn btn-info btn-block" type="submit">log in</button>
             </form>
         </div>
     </div>

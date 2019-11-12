@@ -1,13 +1,4 @@
-.navbar{
-    justify-content: space-between;
-}
-.navbar p{
-    display: inline;
-    color: #ffffff;
-}
-.brand{
-    color: #ffffff;
-}
+
 .container-fluid{
     height: 94vh;
     position: relative;
@@ -51,6 +42,7 @@ input{
 }
 button{
     margin-top: 20px;
+    text-transform: uppercase;
 }
 input[name="email"], input[name="password2"]{
     margin: 0;

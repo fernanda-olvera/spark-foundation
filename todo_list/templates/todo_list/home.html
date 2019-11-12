@@ -1,18 +1,42 @@
 {% extends 'base.html' %}
+{% load static %}
 {% block title %}
 To-Do List
 {% endblock title %}
+{% block page_style %}
+<link rel="stylesheet" type="text/css" href="{% static 'todo_list/home.css' %}">
+{% endblock page_style %}
 {% block content %}
-
+<div class="container-fluid">    
+    <div class="main-wrapper">
     {% comment %} {% for task in tasks %}
         {{task}}
         <br>
     {% endfor %} {% endcomment %}
-    {% if user.is_authenticated %}
-        Hi {{ user.username }}!
+        <h1>To Do List</h1>
+        {% if user.is_authenticated %}   
+         
+        <div class="label-wrapper">
+            <label class="label-container">Comprar 3 tomates en la fruteria
+                <input type="checkbox" checked="checked">
+                <span class="checkmark"></span>
+            </label>
+        </div>
+        <div class="label-wrapper">
+            <label class="label-container">Comprar 3 tomates en la fruteria
+                <input type="checkbox" checked="checked">
+                <span class="checkmark"></span>
+            </label>
+        </div>
+        <div class="label-wrapper">
+            <label class="label-container">Comprar 3 tomates en la fruteria
+                <input type="checkbox" checked="checked">
+                <span class="checkmark"></span>
+            </label>
+        </div>
     {% else %}
-        <p>You are not logged in</p>
-        
+        <p>You are not logged in</p>        
     {% endif %}
-    
+    </div>     
+</div>     
 {% endblock content %}

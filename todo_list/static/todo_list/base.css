@@ -1,0 +1,10 @@
+.navbar{
+    justify-content: space-between;
+}
+.navbar p{
+    display: inline;
+    color: #ffffff;
+}
+.brand{
+    color: #ffffff;
+} 

@@ -1,7 +1,11 @@
 {% extends 'base.html' %}
+{% load static %}
 {% block title %}
 Sign Up
 {% endblock title %}
+{% block page_style %}
+<link rel="stylesheet" type="text/css" href="{% static 'todo_list/login_signup.css' %}">
+{% endblock page_style %}
 {% block content %}
 <div class="container-fluid">
     <div class="blurry">
@@ -24,7 +28,7 @@ Sign Up
                     {% endfor %}
                 </p>
                 {% endfor %}
-                <button class="btn btn-info btn-block" type="submit">SIGN UP</button>
+                <button class="btn btn-info btn-block" type="submit">sign up</button>
             </form>
         </div>
     </div>
