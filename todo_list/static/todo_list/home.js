@@ -1,8 +1,4 @@
-function addTask(){
-    console.log('hola');
-
-}
-$('button.editTask').click(function(){
+$('button.editTask').click(function(){ //Edit Task Button
     var name_field = $(this).closest('.label-wrapper').find('#name-field');
     var name = $(this).closest('.label-wrapper').find('p');
     var text = name.text();
@@ -26,7 +22,7 @@ $(document).on('submit', '#post-form',function(e){
     var original_name=$(this).find('p').text();
     $.ajax({
         type:'POST',
-        url:'/todo_list/edit_task',
+        url:'/todo_list/',
         data:{
             original_name: original_name,
             name: new_name,
@@ -39,7 +35,28 @@ $(document).on('submit', '#post-form',function(e){
         },
         error : function(xhr,errmsg,err) {
         console.log(xhr.status + ": " + xhr.responseText); // provide a bit more info about the error to the console
-    }
+        }
     });
 });
+$('input[type="checkbox"]').on('change',function(e){
+    var completed=$(this).prop('checked');
+    var name= $(this).siblings('p').text();
+    e.preventDefault();
 
+    $.ajax({
+        type:'POST',
+        url:'/todo_list/edit_task',
+        data:{
+            name: name,
+            completed: completed,
+            csrfmiddlewaretoken:$('input[name=csrfmiddlewaretoken]').val(),
+            action: 'post'
+        },
+        success:function(json){
+           console.log('name: '+json.name+ ' checked: '+json.completed);
+        },
+        error : function(xhr,errmsg,err) {
+        console.log(xhr.status + ": " + xhr.responseText); // provide a bit more info about the error to the console
+        }
+    });
+});

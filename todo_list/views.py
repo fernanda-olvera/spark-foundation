@@ -8,6 +8,23 @@ from .forms import SignUpForm
 def index(request):
     tasks=Task.objects.filter(created_by=request.user.id)
     qty=Task.objects.filter(created_by=request.user.id).count()
+    response_data={}
+
+    if request.POST.get('action') == 'post':
+        or_name=request.POST.get('original_name')
+        new_name=request.POST.get('name')
+        checked=request.POST.get('completed')
+        completed=True if checked=='true' else False
+        
+        response_data['name']=new_name
+        response_data['completed']=completed
+
+        t=tasks.get(name=or_name)
+        t.name=new_name
+        t.completed=completed
+        t.save()
+        return JsonResponse(response_data)
+
     return render(request, 'todo_list/home.html', {'tasks':tasks, 'qty':qty})
 
 def signup(request):
@@ -32,18 +49,14 @@ def edit_task(request):
     response_data={}
 
     if request.POST.get('action') == 'post':
-        or_name=request.POST.get('original_name')
-        new_name=request.POST.get('name')
+        name=request.POST.get('name')
         checked=request.POST.get('completed')
         completed=True if checked=='true' else False
         
-        response_data['name']=new_name
+        response_data['name']=name
         response_data['completed']=completed
 
-        t=tasks.get(name=or_name)
-        t.name=new_name
-        t.completed=completed
-        t.save()
+        tasks.filter(name=name).update(completed=completed)
         return JsonResponse(response_data)
 
     return render(request, 'todo_list/home.html', {'tasks':tasks, 'qty':qty})
