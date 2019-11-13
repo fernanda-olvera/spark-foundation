@@ -40,14 +40,19 @@ To-Do List
         {% else %}
             <h2>You don't have any tasks</h2>
         {% endif %}
-        <button class="btn btn-info float-btn">
+        <button id="addTask" class="btn btn-info">
             <i class="fas fa-plus fa-2x"></i>
         </button>
     {% else %}
         <h2>You are not logged in</h2>        
     {% endif %}
     </div>     
-</div>     
+</div>   
+<form id="addTaskForm" class="none-display" title="Add New Task">
+    {% csrf_token %}
+    <label for="task-name">Name task</label>
+    <input name="task-name" type="text" required>
+</form>
 {% endblock content %}
 {% block script_link %}
 <script src="{% static 'todo_list/home.js' %}"></script>

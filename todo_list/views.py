@@ -43,6 +43,22 @@ def signup(request):
         form=SignUpForm()
     return render(request, 'todo_list/signup.html', {'form':form})
 
+def add_task(request):
+    tasks=Task.objects.filter(created_by=request.user.id)
+    qty=Task.objects.filter(created_by=request.user.id).count()
+    response_data={}
+
+    if request.POST.get('action') == 'post':
+        name=request.POST.get('name')
+        
+        response_data['name']=name
+
+        t=Task(created_by=request.user,name=name,completed=False)
+        t.save()
+        return JsonResponse(response_data)
+
+    return render(request, 'todo_list/home.html', {'tasks':tasks, 'qty':qty})
+
 def edit_task(request):
     tasks=Task.objects.filter(created_by=request.user.id)
     qty=Task.objects.filter(created_by=request.user.id).count()

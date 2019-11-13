@@ -1,3 +1,37 @@
+$(document).ready(function(){
+    $('#addTaskForm').dialog({
+        autoOpen:false,
+        dialogClass: "no-close",
+        buttons: [
+            {text:"Add", click:function(){ add_task(); } },
+            { text:"Cancel", click: function(){$(this).dialog('close');} }
+        ]
+    });
+    function add_task(){
+        var name=$('input[name=task-name]').val();
+        // console.log(name);
+        $.ajax({
+            type:'POST',
+            url:'/todo_list/add_task',
+            data:{
+                name: name,
+                csrfmiddlewaretoken:$('input[name=csrfmiddlewaretoken]').val(),
+                action: 'post'
+            },
+            success:function(json){
+               console.log('name: '+json.name);
+            },
+            error : function(xhr,errmsg,err) {
+                console.log(xhr.status + ": " + xhr.responseText); // provide a bit more info about the error to the console
+            }
+        });
+        window.location.reload();
+    }
+});
+
+$('#addTask').click(function(){ //Add Task Button
+    $('#addTaskForm').dialog('open');
+});
 $('button.editTask').click(function(){ //Edit Task Button
     var name_field = $(this).closest('.label-wrapper').find('#name-field');
     var name = $(this).closest('.label-wrapper').find('p');
@@ -33,6 +67,7 @@ $('button.deleteTask').click(function(e){ //Delete Task Button
                 console.log(xhr.status + ": " + xhr.responseText); // provide a bit more info about the error to the console
             }
         });
+        window.location.reload();
     }
     // console.log(text);
 });

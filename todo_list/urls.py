@@ -5,6 +5,7 @@ from django.contrib.auth.views import LoginView
 
 urlpatterns=[
     path('', views.index, name='index'),
+    path('add_task', views.add_task, name='add_task'),
     path('edit_task', views.edit_task, name='edit_task'),
     path('delete_task', views.delete_task, name='delete_task'),
     path('signup', views.signup, name='signup'),
