@@ -13,7 +13,29 @@ $('button.editTask').click(function(){ //Edit Task Button
     $(this).prop('disabled',true)
     // console.log(text)
 });
-
+$('button.deleteTask').click(function(e){ //Delete Task Button
+    var name = $(this).closest('.label-wrapper').find('p').text();
+    //e.preventDefault();
+    if(confirm('Press OK for deleting task "'+name+'"')){
+        console.log('deleted task '+name);
+        $.ajax({
+            type:'POST',
+            url:'/todo_list/delete_task',
+            data:{
+                name: name,
+                csrfmiddlewaretoken:$('input[name=csrfmiddlewaretoken]').val(),
+                action: 'post'
+            },
+            success:function(json){
+               console.log('name: '+json.name);
+            },
+            error : function(xhr,errmsg,err) {
+                console.log(xhr.status + ": " + xhr.responseText); // provide a bit more info about the error to the console
+            }
+        });
+    }
+    // console.log(text);
+});
 $(document).on('submit', '#post-form',function(e){
     var new_name= $(this).find('#name-field').val();
     var completed = $(this).find('input[type="checkbox"]').prop('checked');
@@ -34,11 +56,11 @@ $(document).on('submit', '#post-form',function(e){
            console.log('name: '+json.name+ 'checked: '+json.completed);
         },
         error : function(xhr,errmsg,err) {
-        console.log(xhr.status + ": " + xhr.responseText); // provide a bit more info about the error to the console
+            console.log(xhr.status + ": " + xhr.responseText); // provide a bit more info about the error to the console
         }
     });
 });
-$('input[type="checkbox"]').on('change',function(e){
+$('input[type="checkbox"]').on('change',function(e){ //Click in checkbox
     var completed=$(this).prop('checked');
     var name= $(this).siblings('p').text();
     e.preventDefault();
@@ -56,7 +78,7 @@ $('input[type="checkbox"]').on('change',function(e){
            console.log('name: '+json.name+ ' checked: '+json.completed);
         },
         error : function(xhr,errmsg,err) {
-        console.log(xhr.status + ": " + xhr.responseText); // provide a bit more info about the error to the console
+            console.log(xhr.status + ": " + xhr.responseText); // provide a bit more info about the error to the console
         }
     });
 });

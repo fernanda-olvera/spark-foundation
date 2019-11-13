@@ -60,3 +60,18 @@ def edit_task(request):
         return JsonResponse(response_data)
 
     return render(request, 'todo_list/home.html', {'tasks':tasks, 'qty':qty})
+
+def delete_task(request):
+    tasks=Task.objects.filter(created_by=request.user.id)
+    qty=Task.objects.filter(created_by=request.user.id).count()
+    response_data={}
+
+    if request.POST.get('action') == 'post':
+        name=request.POST.get('name')
+        
+        response_data['name']=name
+
+        tasks.filter(name=name).delete()
+        return JsonResponse(response_data)
+
+    return render(request, 'todo_list/home.html', {'tasks':tasks, 'qty':qty})
