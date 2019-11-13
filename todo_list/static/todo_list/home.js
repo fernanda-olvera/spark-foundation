@@ -18,18 +18,28 @@ $('button.editTask').click(function(){
     // console.log(text)
 });
 
-$('button.accept').click(function(){
-    var name_field=$(this).siblings('#name-field');
-    var name = $(this).siblings('p');
-    var text = name_field.val();
-    var edit_btn = $(this).closest('.label-wrapper').find('.editTask');
-
-    name_field.toggleClass('none-display');
-    $(this).toggleClass('none-display');
-    name.toggleClass('none-display');
-
-    name.text(text)
-    edit_btn.prop('disabled',false)
-
-    console.log(text);
+$(document).on('submit', '#post-form',function(e){
+    var new_name= $(this).find('#name-field').val();
+    var completed = $(this).find('input[type="checkbox"]').prop('checked');
+    // window.alert(completed);
+    // e.preventDefault();
+    var original_name=$(this).find('p').text();
+    $.ajax({
+        type:'POST',
+        url:'/todo_list/edit_task',
+        data:{
+            original_name: original_name,
+            name: new_name,
+            completed: completed,
+            csrfmiddlewaretoken:$('input[name=csrfmiddlewaretoken]').val(),
+            action: 'post'
+        },
+        success:function(json){
+           console.log('name: '+json.name+ 'checked: '+json.completed);
+        },
+        error : function(xhr,errmsg,err) {
+        console.log(xhr.status + ": " + xhr.responseText); // provide a bit more info about the error to the console
+    }
+    });
 });
+

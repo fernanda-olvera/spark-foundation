@@ -1,4 +1,4 @@
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate
 from django.contrib.auth.models import Group
@@ -26,3 +26,24 @@ def signup(request):
         form=SignUpForm()
     return render(request, 'todo_list/signup.html', {'form':form})
 
+def edit_task(request):
+    tasks=Task.objects.filter(created_by=request.user.id)
+    qty=Task.objects.filter(created_by=request.user.id).count()
+    response_data={}
+
+    if request.POST.get('action') == 'post':
+        or_name=request.POST.get('original_name')
+        new_name=request.POST.get('name')
+        checked=request.POST.get('completed')
+        completed=True if checked=='true' else False
+        
+        response_data['name']=new_name
+        response_data['completed']=completed
+
+        t=tasks.get(name=or_name)
+        t.name=new_name
+        t.completed=completed
+        t.save()
+        return JsonResponse(response_data)
+
+    return render(request, 'todo_list/home.html', {'tasks':tasks, 'qty':qty})
