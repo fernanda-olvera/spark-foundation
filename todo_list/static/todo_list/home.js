@@ -9,22 +9,9 @@ $(document).ready(function(){
     });
     function add_task(){
         var name=$('input[name=task-name]').val();
+        var csrf=$('input[name=csrfmiddlewaretoken]').val();
         // console.log(name);
-        $.ajax({
-            type:'POST',
-            url:'/todo_list/add_task',
-            data:{
-                name: name,
-                csrfmiddlewaretoken:$('input[name=csrfmiddlewaretoken]').val(),
-                action: 'post'
-            },
-            success:function(json){
-               console.log('name: '+json.name);
-            },
-            error : function(xhr,errmsg,err) {
-                console.log(xhr.status + ": " + xhr.responseText); // provide a bit more info about the error to the console
-            }
-        });
+        $.post('/todo_list/add_task', { name: name, csrfmiddlewaretoken: csrf, action: 'post'});
         window.location.reload();
     }
 });
@@ -49,24 +36,11 @@ $('button.editTask').click(function(){ //Edit Task Button
 });
 $('button.deleteTask').click(function(e){ //Delete Task Button
     var name = $(this).closest('.label-wrapper').find('p').text();
+    var csrf=$('input[name=csrfmiddlewaretoken]').val();
     //e.preventDefault();
     if(confirm('Press OK for deleting task "'+name+'"')){
         console.log('deleted task '+name);
-        $.ajax({
-            type:'POST',
-            url:'/todo_list/delete_task',
-            data:{
-                name: name,
-                csrfmiddlewaretoken:$('input[name=csrfmiddlewaretoken]').val(),
-                action: 'post'
-            },
-            success:function(json){
-               console.log('name: '+json.name);
-            },
-            error : function(xhr,errmsg,err) {
-                console.log(xhr.status + ": " + xhr.responseText); // provide a bit more info about the error to the console
-            }
-        });
+        $.post('/todo_list/delete_task', {name: name, csrfmiddlewaretoken: csrf, action: 'post'});
         window.location.reload();
     }
     // console.log(text);
@@ -74,46 +48,17 @@ $('button.deleteTask').click(function(e){ //Delete Task Button
 $(document).on('submit', '#post-form',function(e){
     var new_name= $(this).find('#name-field').val();
     var completed = $(this).find('input[type="checkbox"]').prop('checked');
+    var csrf=$('input[name=csrfmiddlewaretoken]').val();
     // window.alert(completed);
     // e.preventDefault();
     var original_name=$(this).find('p').text();
-    $.ajax({
-        type:'POST',
-        url:'/todo_list/',
-        data:{
-            original_name: original_name,
-            name: new_name,
-            completed: completed,
-            csrfmiddlewaretoken:$('input[name=csrfmiddlewaretoken]').val(),
-            action: 'post'
-        },
-        success:function(json){
-           console.log('name: '+json.name+ 'checked: '+json.completed);
-        },
-        error : function(xhr,errmsg,err) {
-            console.log(xhr.status + ": " + xhr.responseText); // provide a bit more info about the error to the console
-        }
-    });
+    $.post('/todo_list/', { original_name: original_name, name: new_name, completed: completed, csrfmiddlewaretoken:csrf, action: 'post'});
 });
 $('input[type="checkbox"]').on('change',function(e){ //Click in checkbox
     var completed=$(this).prop('checked');
     var name= $(this).siblings('p').text();
+    var csrf=$('input[name=csrfmiddlewaretoken]').val();
     e.preventDefault();
 
-    $.ajax({
-        type:'POST',
-        url:'/todo_list/edit_task',
-        data:{
-            name: name,
-            completed: completed,
-            csrfmiddlewaretoken:$('input[name=csrfmiddlewaretoken]').val(),
-            action: 'post'
-        },
-        success:function(json){
-           console.log('name: '+json.name+ ' checked: '+json.completed);
-        },
-        error : function(xhr,errmsg,err) {
-            console.log(xhr.status + ": " + xhr.responseText); // provide a bit more info about the error to the console
-        }
-    });
+    $.post('/todo_list/edit_task', { name: name, completed: completed, csrfmiddlewaretoken: csrf, action: 'post'});
 });
