@@ -6,8 +6,9 @@ from .models import Task
 from .forms import SignUpForm
 
 def index(request):
-    tasks=Task.objects.all()
-    return render(request, 'todo_list/home.html', {'tasks':tasks})
+    tasks=Task.objects.filter(created_by=request.user.id)
+    qty=Task.objects.filter(created_by=request.user.id).count()
+    return render(request, 'todo_list/home.html', {'tasks':tasks, 'qty':qty})
 
 def signup(request):
     if request.method == 'POST':

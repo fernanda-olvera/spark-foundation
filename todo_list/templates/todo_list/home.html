@@ -6,34 +6,46 @@ To-Do List
 {% block page_style %}
 <link rel="stylesheet" type="text/css" href="{% static 'todo_list/home.css' %}">
 {% endblock page_style %}
+
 {% block content %}
 <div class="container-fluid">    
     <div class="main-wrapper">
-        <h1>To Do List</h1>
     {% if user.is_authenticated %}   
-        {% for task in tasks %}
-        <div class="label-wrapper d-flex align-items-center justify-content-between">
-            <label class="label-container d-flex align-items-center">
-                <input type="checkbox" {% if task.completed %}checked{% endif %} >
-                <span class="checkmark"></span>
-                <p>{{task.name}}</p>
-            </label>
-            <div class="d-flex flex-row">
-                <button class="btn btn-info">
-                    <i class="fas fa-pen fa-2x"></i>
-                </button>
-                <button class="btn btn-danger">
-                    <i class="fas fa-trash fa-2x"></i>
-                </button>
-            </div>  
-        </div>
-        {% endfor %}
-        <button class="btn btn-info float-btn">
+        <h1>To Do List</h1>
+        {% if qty > 0 %}
+            {% for task in tasks %}
+            <div class="label-wrapper d-flex align-items-center justify-content-between">
+                <label class="label-container d-flex align-items-center">
+                    <input type="checkbox" {% if task.completed %}checked{% endif %} >
+                    <span class="checkmark"></span>
+                    <input id="name-field" class="none-display" type="text">
+                    <button class="btn btn-success accept none-display">
+                        <i class="fas fa-check"></i>
+                    </button>
+                    <p>{{task.name}}</p>
+                </label>
+                <div class="d-flex flex-row">
+                    <button class="btn btn-info editTask">
+                        <i class="fas fa-pen fa-2x"></i>
+                    </button>
+                    <button class="btn btn-danger">
+                        <i class="fas fa-trash fa-2x"></i>
+                    </button>
+                </div>  
+            </div>
+            {% endfor %}      
+        {% else %}
+            <h2>You don't have any tasks</h2>
+        {% endif %}
+        <button class="btn btn-info float-btn" onclick="addTask()">
             <i class="fas fa-plus fa-2x"></i>
         </button>
     {% else %}
-        <p>You are not logged in</p>        
+        <h2>You are not logged in</h2>        
     {% endif %}
     </div>     
 </div>     
 {% endblock content %}
+{% block script_link %}
+<script src="{% static 'todo_list/home.js' %}"></script>
+{% endblock script_link %}
