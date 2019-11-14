@@ -17,6 +17,8 @@ $(document).ready(function(){
             window.location.reload();
         }
     }
+    $('#sortable').sortable();
+    $('#sortable').disableSelection();
 });
 $('#addTaskForm').on('keyup keypress', function(e){ //Prevents submitting by ENTER key
     var keyCode = e.keyCode || e.which;

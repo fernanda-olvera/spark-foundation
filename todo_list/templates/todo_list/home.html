@@ -12,6 +12,7 @@ To-Do List
 {% if user.is_authenticated %}   
     <h1>To-Do List</h1>
     {% if qty > 0 %}
+    <div id="sortable">
         {% for task in tasks %}
         <div class="label-wrapper d-flex align-items-center justify-content-between">
             <form method="POST" id="post-form">
@@ -35,7 +36,8 @@ To-Do List
                 </button>
             </div>  
         </div>
-        {% endfor %}      
+        {% endfor %} 
+    </div>     
     {% else %}
         <h2>You don't have any tasks</h2>
     {% endif %}
