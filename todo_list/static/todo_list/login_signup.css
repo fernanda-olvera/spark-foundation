@@ -53,3 +53,6 @@ p + button{
 p > input{
     margin: 15px 0;
 }
+input[name^=new_password]{
+    margin-top: 0;
+}
