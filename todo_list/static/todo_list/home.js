@@ -11,7 +11,7 @@ $(document).ready(function(){
         var name=$('input[name=task-name]').val();
         var csrf=$('input[name=csrfmiddlewaretoken]').val();
         // console.log(name);
-        $.post('/todo_list/add_task', { name: name, csrfmiddlewaretoken: csrf, action: 'post'});
+        $.post('/todo_list/', { name: name, csrfmiddlewaretoken: csrf, action: 'addTask'});
         window.location.reload();
     }
 });
@@ -40,25 +40,24 @@ $('button.deleteTask').click(function(e){ //Delete Task Button
     //e.preventDefault();
     if(confirm('Press OK for deleting task "'+name+'"')){
         console.log('deleted task '+name);
-        $.post('/todo_list/delete_task', {name: name, csrfmiddlewaretoken: csrf, action: 'post'});
+        $.post('/todo_list/', {name: name, csrfmiddlewaretoken: csrf, action: 'deleteTask'});
         window.location.reload();
     }
     // console.log(text);
 });
-$(document).on('submit', '#post-form',function(e){
+$(document).on('submit', '#post-form',function(e){ // Edit Task Name
     var new_name= $(this).find('#name-field').val();
-    var completed = $(this).find('input[type="checkbox"]').prop('checked');
     var csrf=$('input[name=csrfmiddlewaretoken]').val();
     // window.alert(completed);
     // e.preventDefault();
     var original_name=$(this).find('p').text();
-    $.post('/todo_list/', { original_name: original_name, name: new_name, completed: completed, csrfmiddlewaretoken:csrf, action: 'post'});
+    $.post('/todo_list/', { name: original_name, new_name: new_name, csrfmiddlewaretoken:csrf, action: 'editN'});
 });
-$('input[type="checkbox"]').on('change',function(e){ //Click in checkbox
+$('input[type="checkbox"]').on('change',function(e){ // Edit Task Completed Status
     var completed=$(this).prop('checked');
     var name= $(this).siblings('p').text();
     var csrf=$('input[name=csrfmiddlewaretoken]').val();
     e.preventDefault();
 
-    $.post('/todo_list/edit_task', { name: name, completed: completed, csrfmiddlewaretoken: csrf, action: 'post'});
+    $.post('/todo_list/', { name: name, completed: completed, csrfmiddlewaretoken: csrf, action: 'editC'});
 });
