@@ -24,7 +24,7 @@ To-Do List
                     <button type="submit" class="btn btn-success accept none-display">
                         <i class="fas fa-check"></i>
                     </button>
-                    <p>{{task.name}}</p>
+                    <p class="{% if task.completed %}done{% endif %}">{{task.name}}</p>
                 </label>
                 </form>
                 <div class="d-flex flex-row">

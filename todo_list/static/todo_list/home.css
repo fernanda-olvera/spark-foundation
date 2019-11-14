@@ -112,3 +112,6 @@ button{
 .no-close .ui-dialog-titlebar-close {
   display: none;
 }
+.done{
+  text-decoration: line-through;
+}
