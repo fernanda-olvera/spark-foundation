@@ -19,6 +19,6 @@ from django.views.generic.base import TemplateView
 
 urlpatterns = [
     path('', include('todo_list.urls')),
-    path('todo_list/', include('django.contrib.auth.urls')),
+    path('', include('django.contrib.auth.urls')),
     path('admin/', admin.site.urls),
 ]
