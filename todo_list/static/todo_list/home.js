@@ -1,3 +1,4 @@
+var home_url='';
 $(document).ready(function(){
     $('#addTaskForm').dialog({
         autoOpen:false,
@@ -13,7 +14,7 @@ $(document).ready(function(){
             $('#error-name').removeClass('none-display');
         } else{
             var csrf=$('input[name=csrfmiddlewaretoken]').val();
-            $.post('/todo_list/', { name: name, csrfmiddlewaretoken: csrf, action: 'addTask'});
+            $.post(home_url, { name: name, csrfmiddlewaretoken: csrf, action: 'addTask'});
             window.location.reload();
         }
     }
@@ -49,7 +50,7 @@ $('button.deleteTask').click(function(e){ //Delete Task Button
     var csrf=$('input[name=csrfmiddlewaretoken]').val();
     if(confirm('Press OK for deleting task "'+name+'"')){
         console.log('deleted task '+name);
-        $.post('/todo_list/', {name: name, csrfmiddlewaretoken: csrf, action: 'deleteTask'});
+        $.post(home_url, {name: name, csrfmiddlewaretoken: csrf, action: 'deleteTask'});
         window.location.reload();
     }
 });
@@ -57,7 +58,7 @@ $(document).on('submit', '#post-form',function(e){ // Edit Task Name
     var new_name= $(this).find('#name-field').val();
     var csrf=$('input[name=csrfmiddlewaretoken]').val();
     var original_name=$(this).find('p').text();
-    $.post('/todo_list/', { name: original_name, new_name: new_name, csrfmiddlewaretoken:csrf, action: 'editN'});
+    $.post(home_url, { name: original_name, new_name: new_name, csrfmiddlewaretoken:csrf, action: 'editN'});
 });
 $('input[type="checkbox"]').on('change',function(e){ // Edit Task Completed Status
     var completed=$(this).prop('checked');
@@ -66,5 +67,5 @@ $('input[type="checkbox"]').on('change',function(e){ // Edit Task Completed Stat
     name.toggleClass('done');
     e.preventDefault();
 
-    $.post('/todo_list/', { name: name.text(), completed: completed, csrfmiddlewaretoken: csrf, action: 'editC'});
+    $.post(home_url, { name: name.text(), completed: completed, csrfmiddlewaretoken: csrf, action: 'editC'});
 });
