@@ -8,3 +8,8 @@
 .brand{
     color: #ffffff;
 } 
+.container-fluid{
+    height: 94vh;
+    position: relative;
+    padding: 0;
+}
