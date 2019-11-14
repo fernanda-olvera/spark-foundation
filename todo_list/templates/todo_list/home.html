@@ -10,7 +10,7 @@ To-Do List
 {% block content %}
 <div class="main-wrapper">
 {% if user.is_authenticated %}   
-    <h1>To Do List</h1>
+    <h1>To-Do List</h1>
     {% if qty > 0 %}
         {% for task in tasks %}
         <div class="label-wrapper d-flex align-items-center justify-content-between">
@@ -50,6 +50,7 @@ To-Do List
     {% csrf_token %}
     <label for="task-name">Name task</label>
     <input name="task-name" type="text" required>
+    <p id="error-name" class="none-display" style="color:red">Task name can't be empty</p>
 </form>
 {% endblock content %}
 {% block script_link %}

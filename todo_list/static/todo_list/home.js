@@ -9,12 +9,22 @@ $(document).ready(function(){
     });
     function add_task(){
         var name=$('input[name=task-name]').val();
-        var csrf=$('input[name=csrfmiddlewaretoken]').val();
-        $.post('/todo_list/', { name: name, csrfmiddlewaretoken: csrf, action: 'addTask'});
-        window.location.reload();
+        if(name == ''){
+            $('#error-name').removeClass('none-display');
+        } else{
+            var csrf=$('input[name=csrfmiddlewaretoken]').val();
+            $.post('/todo_list/', { name: name, csrfmiddlewaretoken: csrf, action: 'addTask'});
+            window.location.reload();
+        }
     }
 });
-
+$('#addTaskForm').on('keyup keypress', function(e){ //Prevents submitting by ENTER key
+    var keyCode = e.keyCode || e.which;
+    if(keyCode === 13){
+        e.preventDefault();
+        return false;
+    }
+});
 $('#addTask').click(function(){ //Add Task Button
     $('#addTaskForm').dialog('open');
 });
