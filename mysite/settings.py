@@ -77,14 +77,14 @@ WSGI_APPLICATION = 'mysite.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-        # 'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        # 'NAME': 'spark_foundation',
-        # 'USER': 'ferAdmin',
-        # 'PASSWORD': 'spark123',
-        # 'HOST': 'localhost',
-        # 'PORT': '',
+        # 'ENGINE': 'django.db.backends.sqlite3',
+        # 'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'd89tqmq6pbb17k',
+        'USER': 'gztfsyazcoimjd',
+        'PASSWORD': '09213bab9e25146ddf82151a02e7a41189ab13fc70bf8984d8dac204d83c9711',
+        'HOST': 'ec2-174-129-203-86.compute-1.amazonaws.com',
+        'PORT': '5432',
     }
 }
 
