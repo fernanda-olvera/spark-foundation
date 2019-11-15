@@ -139,3 +139,6 @@ EMAIL_FILE_PATH = os.path.join(BASE_DIR,"sent_emails")
 # EMAIL_HOST_PASSWORD = ""
 # EMAIL_USE_TLS = True
 # EMAIL_USE_SSL = False
+
+import django_heroku
+django_heroku.settings(locals())
