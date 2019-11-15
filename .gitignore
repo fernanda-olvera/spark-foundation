@@ -3,4 +3,4 @@
 /sent_emails/*
 db.sqlite3
 local_settings.py
-/mysite/__pycache__
+/mysite/__pycache__/*
