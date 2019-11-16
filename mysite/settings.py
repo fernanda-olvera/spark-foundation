@@ -134,15 +134,14 @@ LOGOUT_REDIRECT_URL = 'index'
 STATICFILES_DIRS = ( os.path.join(PROJECT_ROOT, 'static'), )
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
-EMAIL_BACKEND = "django.core.mail.backends.filebased.EmailBackend"
-EMAIL_FILE_PATH = os.path.join(BASE_DIR,"sent_emails")
-# EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
-# EMAIL_HOST = "smtp.gmail.com"
-# EMAIL_PORT = 587
-# EMAIL_HOST_USER = "fernanda.olvera@sparktechs.com"
-# EMAIL_HOST_PASSWORD = ""
-# EMAIL_USE_TLS = True
-# EMAIL_USE_SSL = False
+
+EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+EMAIL_HOST = "smtp.gmail.com"
+EMAIL_PORT = 587
+EMAIL_HOST_USER = "fernanda.olvera@sparktechs.com"
+EMAIL_HOST_PASSWORD = "Faustfeuer00"
+EMAIL_USE_TLS = True
+EMAIL_USE_SSL = False
 
 import django_heroku
 django_heroku.settings(locals())
