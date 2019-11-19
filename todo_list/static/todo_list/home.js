@@ -14,8 +14,7 @@ $(document).ready(function(){
             $('#error-name').removeClass('none-display');
         } else{
             var csrf=$('input[name=csrfmiddlewaretoken]').val();
-            $.post(home_url, { name: name, csrfmiddlewaretoken: csrf, action: 'addTask'});
-            window.location.reload();
+            $.post(home_url, { name: name, csrfmiddlewaretoken: csrf, action: 'addTask'}, function(){ window.location.reload(); });
         }
     }
     $('#sortable').sortable();
@@ -50,8 +49,7 @@ $('button.deleteTask').click(function(e){ //Delete Task Button
     var csrf=$('input[name=csrfmiddlewaretoken]').val();
     if(confirm('Press OK for deleting task "'+name+'"')){
         console.log('deleted task '+name);
-        $.post(home_url, {name: name, csrfmiddlewaretoken: csrf, action: 'deleteTask'});
-        window.location.reload();
+        $.post(home_url, {name: name, csrfmiddlewaretoken: csrf, action: 'deleteTask'}, function(){ window.location.reload(); });
     }
 });
 $(document).on('submit', '#post-form',function(e){ // Edit Task Name
