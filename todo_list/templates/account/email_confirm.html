@@ -5,6 +5,7 @@
 {% if confirmation %}
 <p>Please confirm that <strong>{{confirmation.email_address.email}}</strong> is a valid address for <strong>{{confirmation.email_address.user}}</strong>.</p>
 <form method="post">
+    {% csrf_token %}
     <button class="btn btn-primary" type="submit">Confirm</button>
 </form>
 {% else %}
