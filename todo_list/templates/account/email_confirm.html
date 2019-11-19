@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% load account socialaccount %}
+{% block content %}
+<h1>Confirm Email</h1>
+{% if confirmation %}
+<p>Please confirm that <strong>{{confirmation.email_address.email}}</strong> is a valid address for <strong>{{confirmation.email_address.user}}</strong>.</p>
+<form method="post">
+    <button class="btn btn-primary" type="submit">Confirm</button>
+</form>
+{% else %}
+<p>This email confirmation link has expired. Please <a href="{% url 'account_email' %}">click here</a> to issue a new confirmation email.</p>
+
+{% endif %}
+
+{% endblock content %}
