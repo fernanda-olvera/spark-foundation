@@ -37,7 +37,12 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites'
     'todo_list.apps.TodoListConfig',
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'allauth.socialaccount.providers.github',
     # 'spark-foundation',
 ]
 
@@ -155,3 +160,10 @@ try:
     from local_settings import *
 except ImportError:
     pass
+
+AUTHENTICATION_BACKENDS = (
+    "django.contrib.auth.backends.ModelBackend",
+    "allauth.account.auth_backends.AuthenticationBackend",
+)
+
+SITE_ID = 1
