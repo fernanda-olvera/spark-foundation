@@ -7,11 +7,9 @@ Sign Up
 <link rel="stylesheet" type="text/css" href="{% static 'todo_list/registration.css' %}">
 {% endblock page_style %}
 {% block content %}
-<div class="blurry">
-    <div class="bg-cat"></div>
-</div>
+<div class="bg-cat"></div>
 <div class="form-wrap d-flex align-items-center">
-    <div class="form-block">
+    <div class="form-block wider">
         <h2>Register</h2>
         <form method="post">
             {% csrf_token %}
@@ -27,6 +25,7 @@ Sign Up
             </p>
             {% endfor %}
             <button class="btn btn-info btn-block" type="submit">sign up</button>
+            <p class="space-top">Already a member? <a href="#">Sign in</a></p>
         </form>
     </div>
 </div>

@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load account socialaccount %}
+{% block title %}
+Email Confirmation
+{% endblock title %}
+{% block page_style %}
+<link rel="stylesheet" type="text/css" href="{% static 'todo_list/registration.css' %}">
+{% endblock page_style %}
+{% block content %}
+<div class="bg-cat"></div>
+<div class="form-wrap d-flex align-items-center">
+    <div class="form-block wider">
+        <h1>Confirm Email</h1>
+        {% if confirmation %}
+        <p>Please confirm that <strong>{{confirmation.email_address.email}}</strong> is a valid address for <strong>{{confirmation.email_address.user}}</strong>.</p>
+        <form method="post">
+            {% csrf_token %}
+            <button class="btn btn-primary" type="submit">Confirm</button>
+        </form>
+        {% else %}
+        <p>This email confirmation link has expired. Please <a href="{% url 'account_email' %}">click here</a> to issue a new confirmation email.</p>
+        {% endif %}
+    </div>
+</div>
+{% endblock content %}

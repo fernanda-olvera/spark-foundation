@@ -1,7 +1,8 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load account socialaccount %}
 {% block title %}
-Password reset complete
+Verify email
 {% endblock title %}
 {% block page_style %}
 <link rel="stylesheet" type="text/css" href="{% static 'todo_list/registration.css' %}">
@@ -10,9 +11,10 @@ Password reset complete
 <div class="bg-cat"></div>
 <div class="form-wrap d-flex align-items-center">
     <div class="form-block wider">
-        <h2>Password reset complete</h2>
-        <p>Your new password has been set. You can log in now.</p>
+        <h1>Verify your email</h1>
+        <p>A link has been sent to you via email. You'll need to click that link to verify your email and log into your To-Do List account</p>
+        <p>Please contact us if you don't receive the email in the next few minutes. Be sure to check your spam folders.</p>
     </div>
 </div>
-    
+
 {% endblock content %}
