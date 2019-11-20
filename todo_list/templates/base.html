@@ -1,5 +1,4 @@
 {% load static %}
-{% load socialaccount %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -22,8 +21,8 @@
             <p>Welcome {{ user.username }}!</p>
             <a href="{% url 'logout' %}" class="btn btn-danger">Log Out</a>
         {% else %}
-            <a href="{% provider_login_url 'github' %}" class="btn btn-primary">Log In</a>
-            {% comment %} <a href="{% url 'signup' %}" class="btn btn-primary">Sign Up</a> {% endcomment %}
+            <a href="{% url 'login' %}" class="btn btn-dark">Log In</a>
+            <a href="{% url 'signup' %}" class="btn btn-primary">Sign Up</a>
         {% endif %}
         </div>
     </nav>

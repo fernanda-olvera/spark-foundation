@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load socialaccount %}
 {% block title %}
 Log In
 {% endblock title %}
@@ -7,11 +8,9 @@ Log In
 <link rel="stylesheet" type="text/css" href="{% static 'todo_list/registration.css' %}">
 {% endblock page_style %}
 {% block content %}
-<div class="blurry">
-    <div class="bg-cat"></div>
-</div>
+<div class="bg-cat"></div>
 <div class="form-wrap d-flex align-items-center">
-    <div class="form-block">
+    <div class="form-block wider">
         <h2>Sign In</h2>
         <form method="post">
             {% csrf_token %}
@@ -22,8 +21,13 @@ Log In
             {% if form.errors %}
                 <small style="color: red">Your username and password didn't match. Please try again.</small><br>
             {% endif %}
-            <button class="btn btn-info btn-block" type="submit">log in</button>
-            <a href="{% url 'password_reset' %}">Forgot password?</a>
+            <button class="btn btn-info btn-block" type="submit">sign in</button>
+            <p class="or-label"><span><b>or</b></span></p>
+            <a class="btn btn-secondary btn-block" href="{% provider_login_url 'github' %}"><i class="fab fa-github"></i>sign in with github</a>            
+            <div class="d-flex justify-content-between space-top">
+                <a href="{% url 'password_reset' %}">Forgot?</a>
+                <a href="{% url 'signup' %}">Create account</a>
+            </div>
         </form>
     </div>
 </div>
